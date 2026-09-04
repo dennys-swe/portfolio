@@ -26,7 +26,7 @@ export function PersonalProjects() {
         transition={{ duration: 0.5, delay: 0.05 }}
         className="mb-12 max-w-2xl text-muted-foreground"
       >
-        Código aberto, em produção ou em pré-lançamento — construídos e mantidos sozinho.
+        Em produção ou em pré-lançamento — construídos e mantidos sozinho.
       </motion.p>
 
       <div className="grid gap-6 sm:grid-cols-2">
