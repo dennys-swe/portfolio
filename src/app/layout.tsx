@@ -20,7 +20,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Dennys Alves — Backend Developer",
+  title: "Dennys Alves · Backend Developer",
   description:
     "Desenvolvedor backend (Python/FastAPI, Java/Spring Boot) com experiência full-stack. Sistemas em produção, sozinho, do requisito ao deploy.",
 };

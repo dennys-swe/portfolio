@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/brand-icons";
-import { Badge } from "@/components/ui/badge";
+import { TechBadge } from "@/components/tech-badge";
 import { SectionLabel } from "@/components/section-label";
 import { personalProjects } from "@/lib/content";
 
@@ -31,7 +31,7 @@ export function PersonalProjects() {
         transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         className="mb-12 max-w-2xl text-muted-foreground"
       >
-        Em produção ou em pré-lançamento — construídos e mantidos sozinho.
+        Em produção ou em pré-lançamento, cada um com testes automatizados e decisões de arquitetura documentadas.
       </motion.p>
 
       <div className="grid gap-6 sm:grid-cols-2">
@@ -58,7 +58,7 @@ export function PersonalProjects() {
 
             <div className="flex flex-1 flex-col p-6">
               <div className="mb-2 flex items-center justify-between">
-                <h3 className="font-heading text-lg font-semibold">{project.name}</h3>
+                <h3 className="font-heading text-xl font-semibold">{project.name}</h3>
                 <div className="flex gap-2">
                   {project.github && (
                     <a
@@ -115,9 +115,7 @@ export function PersonalProjects() {
               >
                 {project.stack.map((tech) => (
                   <motion.div key={tech} variants={itemVariants}>
-                    <Badge variant="secondary" className="text-xs font-normal">
-                      {tech}
-                    </Badge>
+                    <TechBadge tech={tech} />
                   </motion.div>
                 ))}
               </motion.div>

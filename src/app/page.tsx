@@ -19,7 +19,7 @@ export default function Home() {
         <Contact />
       </main>
       <footer className="border-t border-white/10 px-6 py-8 text-center text-xs text-muted-foreground">
-        Dennys Alves — {new Date().getFullYear()}
+        Dennys Alves © {new Date().getFullYear()}
       </footer>
     </>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
+import { TechBadge } from "@/components/tech-badge";
 import { SectionLabel } from "@/components/section-label";
 import { clientCases, clientIntro } from "@/lib/content";
 
@@ -42,7 +42,7 @@ export function ClientWork() {
             whileHover={{ y: -4, borderColor: "var(--brand)" }}
             className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors"
           >
-            <h3 className="mb-3 font-heading text-lg font-semibold">{c.title}</h3>
+            <h3 className="mb-3 font-heading text-xl font-semibold">{c.title}</h3>
 
             <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
               Problema
@@ -68,9 +68,7 @@ export function ClientWork() {
             >
               {c.stack.map((tech) => (
                 <motion.div key={tech} variants={itemVariants}>
-                  <Badge variant="secondary" className="text-xs font-normal">
-                    {tech}
-                  </Badge>
+                  <TechBadge tech={tech} />
                 </motion.div>
               ))}
             </motion.div>

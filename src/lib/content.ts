@@ -2,7 +2,7 @@ export const profile = {
   name: "Dennys Alves",
   role: "Backend Developer",
   tagline:
-    "Construo e mantenho sistemas em produção — sozinho, do zero ao deploy — para negócios reais e para os meus próprios projetos.",
+    "Construo APIs e sistemas backend prontos para produção: modelagem de dados, testes automatizados e deploy contínuo, do primeiro commit ao suporte pós-entrega.",
   stackLine: "Python/FastAPI · Java/Spring Boot · TypeScript/React · PostgreSQL · MongoDB",
   proofLine:
     "4+ sistemas em produção para clientes reais · projetos pessoais com +350 testes automatizados no total · integração real com Open Finance e Mercado Pago",
@@ -13,10 +13,13 @@ export const profile = {
 
 export const about = {
   paragraphs: [
-    "Desenvolvedor backend (Python/FastAPI e Java/Spring Boot) com experiência full-stack em React/TypeScript, cursando Engenharia de Software. Construo APIs REST com modelagem de dados relacional, testes automatizados e arquitetura em camadas — sozinho, do requisito ao deploy.",
-    "Além dos projetos pessoais, atendo negócios locais como desenvolvedor autônomo — levanto o problema, desenho e entrego o sistema, e dou suporte depois. Já entreguei sistemas em produção: controle de estoque, cardápio digital com pagamento online, gestão de pedidos e PDV com operação offline.",
+    "Desenvolvedor backend (Python/FastAPI e Java/Spring Boot) com experiência full-stack em React/TypeScript, cursando Engenharia de Software. Construo APIs REST com modelagem de dados relacional, testes automatizados e arquitetura em camadas, do requisito ao deploy. Em equipe, liderei a migração de uma API acadêmica para Spring Boot 3 com outros 3 desenvolvedores.",
+    "Além dos projetos pessoais, atuo como desenvolvedor autônomo entregando sistemas sob medida para negócios locais: levanto o problema, desenho e implemento a solução, e sigo dando suporte depois da entrega. Já coloquei em produção controle de estoque, cardápio digital com pagamento online, gestão de pedidos e PDV com operação offline.",
   ],
 };
+
+export const aiNote =
+  "Uso Claude Code no processo de desenvolvimento: reviso, testo e assumo a responsabilidade pelo que entra em produção.";
 
 export type PersonalProject = {
   slug: string;
@@ -76,10 +79,10 @@ export const personalProjects: PersonalProject[] = [
     purpose: "Sistema de gestão para quiosque: venda offline-first, fechamento de caixa e previsão de preparo.",
     stack: ["Next.js", "Supabase", "TypeScript"],
     highlights: [
-      "Investiguei o Supabase Realtime a fundo (WAL, slot de replicação, canal confirmado pelo servidor) e mesmo assim não entregava eventos de forma confiável — troquei por polling de 5s como fonte real de convergência.",
+      "Investiguei o Supabase Realtime a fundo (WAL, slot de replicação, canal confirmado pelo servidor) e mesmo assim não entregava eventos de forma confiável: troquei por polling de 5s como fonte real de convergência.",
       "Desenho de sincronização por log append-only entre aparelhos (cada toque é um evento, a conta é a soma), para evitar que 'o último a escrever vence' apague consumo em silêncio.",
     ],
-    status: "Projeto pessoal em pré-lançamento — ainda não apresentado a clientes.",
+    status: "Projeto pessoal em pré-lançamento, ainda não apresentado a clientes.",
   },
 ];
 
@@ -92,17 +95,17 @@ export type ClientCase = {
 };
 
 export const clientIntro =
-  "Além dos projetos pessoais, atuo como desenvolvedor autônomo entregando sistemas sob medida para pequenos negócios — do requisito ao deploy e suporte. Sem citar nomes de clientes: o que importa aqui é o problema resolvido.";
+  "Além dos projetos pessoais, atuo como desenvolvedor autônomo entregando sistemas sob medida para pequenos negócios, do requisito ao deploy e suporte. Sem citar nomes de clientes: o que importa aqui é o problema resolvido.";
 
 export const clientCases: ClientCase[] = [
   {
     title: "PDV e controle de caixa para negócio de confeitaria",
     problem: "Duas lojas, controle de caixa e vendas ainda feito manualmente.",
     solution:
-      "App offline-first: registra venda mesmo sem internet e sincroniza sozinho quando a rede volta.",
+      "App offline-first: registra venda mesmo sem internet e sincroniza automaticamente quando a rede volta.",
     stack: ["Next.js", "Supabase", "IndexedDB"],
     challenge:
-      "Duas funcionárias abrindo caixa na mesma loja ao mesmo tempo, em aparelhos diferentes — resolvido com um índice único no banco, não com lógica de aplicação. O fechamento de caixa soma tudo que sincronizou de qualquer dispositivo, mas a tela de operação mostra só o que aquele aparelho específico registrou: decisão consciente de não cruzar dado local com servidor em tempo real, para manter a tela funcionando offline sem complexidade desproporcional ao caso de uso.",
+      "Duas funcionárias abrindo caixa na mesma loja ao mesmo tempo, em aparelhos diferentes: resolvido com um índice único no banco, não com lógica de aplicação. O fechamento de caixa soma tudo que sincronizou de qualquer dispositivo, mas a tela de operação mostra só o que aquele aparelho específico registrou: decisão consciente de não cruzar dado local com servidor em tempo real, para manter a tela funcionando offline sem complexidade desproporcional ao caso de uso.",
   },
   {
     title: "Controle de estoque e vendas para revendedora",
@@ -136,4 +139,5 @@ export const stackGroups = [
   { label: "Frontend", items: ["React", "TypeScript", "Next.js", "Tailwind CSS"] },
   { label: "Dados", items: ["PostgreSQL", "MongoDB", "Supabase", "SQLAlchemy"] },
   { label: "Infra", items: ["Docker", "Vercel", "Render", "Neon", "Git/GitHub", "CI/CD"] },
+  { label: "Metodologias", items: ["Scrum", "Kanban", "Git Flow", "Code Review"] },
 ];

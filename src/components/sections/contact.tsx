@@ -13,7 +13,7 @@ export function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-4 font-heading text-3xl font-semibold tracking-tight"
+        className="mb-4 font-heading text-4xl font-semibold tracking-tight sm:text-5xl"
       >
         Vamos conversar
       </motion.h2>

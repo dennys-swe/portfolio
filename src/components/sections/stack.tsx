@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
+import { TechBadge } from "@/components/tech-badge";
 import { SectionLabel } from "@/components/section-label";
-import { stackGroups } from "@/lib/content";
+import { aiNote, stackGroups } from "@/lib/content";
 
 const listVariants = {
   hidden: {},
@@ -43,16 +43,11 @@ export function Stack() {
               >
                 {group.items.map((item) => (
                   <motion.div key={item} variants={itemVariants}>
-                    <Badge
+                    <TechBadge
+                      tech={item}
                       variant="outline"
-                      className={
-                        isBackend
-                          ? "border-brand/40 text-brand text-xs font-normal"
-                          : "text-xs font-normal"
-                      }
-                    >
-                      {item}
-                    </Badge>
+                      className={isBackend ? "border-brand/40 text-brand" : undefined}
+                    />
                   </motion.div>
                 ))}
               </motion.div>
@@ -60,6 +55,16 @@ export function Stack() {
           );
         })}
       </div>
+
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-30px" }}
+        transition={{ duration: 0.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-10 font-mono text-xs text-muted-foreground/60"
+      >
+        {aiNote}
+      </motion.p>
     </section>
   );
 }
