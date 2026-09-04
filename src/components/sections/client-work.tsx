@@ -2,25 +2,30 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import { SectionLabel } from "@/components/section-label";
 import { clientCases, clientIntro } from "@/lib/content";
+
+const listVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -8 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+};
 
 export function ClientWork() {
   return (
     <section id="clients" className="mx-auto max-w-5xl px-6 py-28">
-      <motion.h2
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5 }}
-        className="mb-2 text-sm font-medium uppercase tracking-widest text-muted-foreground"
-      >
-        Trabalho para clientes
-      </motion.h2>
+      <div className="mb-2">
+        <SectionLabel>Trabalho para clientes</SectionLabel>
+      </div>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5, delay: 0.05 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         className="mb-12 max-w-2xl text-muted-foreground"
       >
         {clientIntro}
@@ -32,11 +37,12 @@ export function ClientWork() {
             key={c.title}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: (i % 2) * 0.08 }}
-            className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6"
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.4, delay: (i % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -4, borderColor: "var(--brand)" }}
+            className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors"
           >
-            <h3 className="mb-3 text-lg font-semibold">{c.title}</h3>
+            <h3 className="mb-3 font-heading text-lg font-semibold">{c.title}</h3>
 
             <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
               Problema
@@ -53,13 +59,21 @@ export function ClientWork() {
             </p>
             <p className="mb-5 text-sm text-muted-foreground">{c.challenge}</p>
 
-            <div className="mt-auto flex flex-wrap gap-1.5">
+            <motion.div
+              variants={listVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-30px" }}
+              className="mt-auto flex flex-wrap gap-1.5"
+            >
               {c.stack.map((tech) => (
-                <Badge key={tech} variant="secondary" className="text-xs font-normal">
-                  {tech}
-                </Badge>
+                <motion.div key={tech} variants={itemVariants}>
+                  <Badge variant="secondary" className="text-xs font-normal">
+                    {tech}
+                  </Badge>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.article>
         ))}
       </div>

@@ -11,17 +11,17 @@ export function Contact() {
       <motion.h2
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5 }}
-        className="mb-4 text-3xl font-semibold tracking-tight"
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="mb-4 font-heading text-3xl font-semibold tracking-tight"
       >
         Vamos conversar
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5, delay: 0.05 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         className="mb-10 text-muted-foreground"
       >
         Aberto a vagas remotas de desenvolvedor backend, júnior ou pleno.
@@ -30,13 +30,13 @@ export function Contact() {
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         className="flex flex-wrap items-center justify-center gap-3"
       >
         <a
           href={`mailto:${profile.email}`}
-          className="flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+          className="flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
         >
           <Mail className="size-4" /> {profile.email}
         </a>
@@ -44,7 +44,7 @@ export function Contact() {
           href={profile.linkedin}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-white/5"
+          className="flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium transition-colors hover:border-brand/40 hover:bg-white/5"
         >
           <LinkedinIcon className="size-4" /> LinkedIn
         </a>
@@ -52,7 +52,7 @@ export function Contact() {
           href={profile.github}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium transition-colors hover:bg-white/5"
+          className="flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium transition-colors hover:border-brand/40 hover:bg-white/5"
         >
           <GithubIcon className="size-4" /> GitHub
         </a>

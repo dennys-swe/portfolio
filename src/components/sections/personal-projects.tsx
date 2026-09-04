@@ -5,25 +5,30 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/brand-icons";
 import { Badge } from "@/components/ui/badge";
+import { SectionLabel } from "@/components/section-label";
 import { personalProjects } from "@/lib/content";
+
+const listVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -8 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+};
 
 export function PersonalProjects() {
   return (
     <section id="projects" className="mx-auto max-w-5xl px-6 py-28">
-      <motion.h2
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5 }}
-        className="mb-2 text-sm font-medium uppercase tracking-widest text-muted-foreground"
-      >
-        Projetos pessoais
-      </motion.h2>
+      <div className="mb-2">
+        <SectionLabel>Projetos pessoais</SectionLabel>
+      </div>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5, delay: 0.05 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         className="mb-12 max-w-2xl text-muted-foreground"
       >
         Em produção ou em pré-lançamento — construídos e mantidos sozinho.
@@ -35,9 +40,10 @@ export function PersonalProjects() {
             key={project.slug}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, delay: (i % 2) * 0.08 }}
-            className="flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]"
+            viewport={{ once: true, margin: "-30px" }}
+            transition={{ duration: 0.4, delay: (i % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -4, borderColor: "var(--brand)" }}
+            className="flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-colors"
           >
             {project.images && project.images.length > 0 && (
               <div className="relative h-44 w-full border-b border-white/10 bg-black/40">
@@ -52,7 +58,7 @@ export function PersonalProjects() {
 
             <div className="flex flex-1 flex-col p-6">
               <div className="mb-2 flex items-center justify-between">
-                <h3 className="text-lg font-semibold">{project.name}</h3>
+                <h3 className="font-heading text-lg font-semibold">{project.name}</h3>
                 <div className="flex gap-2">
                   {project.github && (
                     <a
@@ -60,7 +66,7 @@ export function PersonalProjects() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`Código de ${project.name}`}
-                      className="text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-muted-foreground transition-colors hover:text-brand"
                     >
                       <GithubIcon className="size-4" />
                     </a>
@@ -71,7 +77,7 @@ export function PersonalProjects() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`Site de ${project.name}`}
-                      className="text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-muted-foreground transition-colors hover:text-brand"
                     >
                       <ArrowUpRight className="size-4" />
                     </a>
@@ -85,22 +91,36 @@ export function PersonalProjects() {
                 <p className="mb-4 text-xs font-medium text-amber-400/80">{project.status}</p>
               )}
 
-              <ul className="mb-5 space-y-2 text-sm text-muted-foreground">
+              <motion.ul
+                variants={listVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-30px" }}
+                className="mb-5 space-y-2 text-sm text-muted-foreground"
+              >
                 {project.highlights.map((h, idx) => (
-                  <li key={idx} className="flex gap-2">
-                    <span className="mt-2 size-1 shrink-0 rounded-full bg-muted-foreground/50" />
+                  <motion.li key={idx} variants={itemVariants} className="flex gap-2">
+                    <span className="mt-2 size-1 shrink-0 rounded-full bg-brand/70" />
                     <span>{h}</span>
-                  </li>
+                  </motion.li>
                 ))}
-              </ul>
+              </motion.ul>
 
-              <div className="mt-auto flex flex-wrap gap-1.5">
+              <motion.div
+                variants={listVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-30px" }}
+                className="mt-auto flex flex-wrap gap-1.5"
+              >
                 {project.stack.map((tech) => (
-                  <Badge key={tech} variant="secondary" className="text-xs font-normal">
-                    {tech}
-                  </Badge>
+                  <motion.div key={tech} variants={itemVariants}>
+                    <Badge variant="secondary" className="text-xs font-normal">
+                      {tech}
+                    </Badge>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </motion.article>
         ))}
