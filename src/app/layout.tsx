@@ -20,10 +20,28 @@ const fraunces = Fraunces({
   weight: ["500", "600", "700"],
 });
 
+const siteUrl = "https://dennys.mandit.com.br";
+const siteTitle = "Dennys Alves · Backend Developer";
+const siteDescription =
+  "Desenvolvedor backend (Python/FastAPI, Java/Spring Boot) com experiência full-stack. Sistemas em produção para clientes reais, do requisito ao suporte pós-entrega.";
+
 export const metadata: Metadata = {
-  title: "Dennys Alves · Backend Developer",
-  description:
-    "Desenvolvedor backend (Python/FastAPI, Java/Spring Boot) com experiência full-stack. Sistemas em produção, sozinho, do requisito ao deploy.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: siteTitle,
+    title: siteTitle,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
