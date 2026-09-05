@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { useLocale } from "@/components/locale-provider";
+import { useContent, useLocale } from "@/components/locale-provider";
 import { Flag } from "@/components/flags";
 import { LOCALES, localeMeta } from "@/lib/i18n";
 
 export function LanguageSwitcher() {
-  const { locale, setLocale, t } = useLocale();
+  const { locale, setLocale } = useLocale();
+  const t = useContent();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -32,7 +33,7 @@ export function LanguageSwitcher() {
     <div ref={ref} className="relative flex items-center">
       <button
         type="button"
-        aria-label={t.language}
+        aria-label={t.a11y.language}
         aria-expanded={open}
         aria-haspopup="listbox"
         onClick={() => setOpen((v) => !v)}

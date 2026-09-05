@@ -3,9 +3,12 @@
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons";
+import { useContent } from "@/components/locale-provider";
 import { profile } from "@/lib/content";
 
 export function Hero() {
+  const t = useContent();
+
   return (
     <section
       id="top"
@@ -26,9 +29,7 @@ export function Hero() {
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
           <span className="relative inline-flex size-2 rounded-full bg-brand" />
         </span>
-        <span className="text-xs font-medium text-muted-foreground">
-          Disponível para novas oportunidades
-        </span>
+        <span className="text-xs font-medium text-muted-foreground">{t.hero.available}</span>
       </motion.div>
 
       <motion.p
@@ -37,7 +38,7 @@ export function Hero() {
         transition={{ duration: 0.4, delay: 0.05 }}
         className="mb-4 text-sm font-medium uppercase tracking-widest text-muted-foreground"
       >
-        {profile.role}
+        {t.hero.role}
       </motion.p>
       <motion.h1
         initial={{ opacity: 0, y: 14 }}
@@ -53,7 +54,7 @@ export function Hero() {
         transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         className="mt-6 max-w-xl text-balance text-lg text-muted-foreground"
       >
-        {profile.tagline}
+        {t.hero.tagline}
       </motion.p>
       <motion.p
         initial={{ opacity: 0, y: 14 }}
@@ -70,8 +71,8 @@ export function Hero() {
         transition={{ duration: 0.5, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         className="mt-3 flex items-center gap-1.5 font-mono text-xs text-muted-foreground/60"
       >
-        <span>$ status --production</span>
-        <span className="text-brand">→ 4 sistemas ativos</span>
+        <span>{t.hero.statusLabel}</span>
+        <span className="text-brand">{t.hero.statusValue}</span>
         <motion.span
           aria-hidden
           animate={{ opacity: [1, 0] }}
@@ -92,7 +93,7 @@ export function Hero() {
           href="#projects"
           className="rounded-full bg-brand px-5 py-2.5 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
         >
-          Ver projetos
+          {t.hero.ctaProjects}
         </a>
         <a
           href={profile.github}
@@ -114,7 +115,7 @@ export function Hero() {
           href={`mailto:${profile.email}`}
           className="flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-medium transition-colors hover:border-brand/40 hover:bg-white/5"
         >
-          <Mail className="size-4" /> E-mail
+          <Mail className="size-4" /> {t.hero.ctaEmail}
         </a>
       </motion.div>
 
@@ -124,7 +125,7 @@ export function Hero() {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="mt-14 max-w-2xl text-balance text-xs text-muted-foreground/70"
       >
-        {profile.proofLine}
+        {t.hero.proofLine}
       </motion.p>
     </section>
   );

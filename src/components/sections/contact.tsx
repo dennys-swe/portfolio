@@ -3,9 +3,12 @@
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons";
+import { useContent } from "@/components/locale-provider";
 import { profile } from "@/lib/content";
 
 export function Contact() {
+  const t = useContent();
+
   return (
     <section id="contact" className="mx-auto max-w-2xl px-6 py-28 text-center">
       <motion.h2
@@ -15,7 +18,7 @@ export function Contact() {
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="mb-4 font-heading text-4xl font-semibold tracking-tight sm:text-5xl"
       >
-        Vamos conversar
+        {t.contact.heading}
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
@@ -24,7 +27,7 @@ export function Contact() {
         transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         className="mb-10 text-muted-foreground"
       >
-        Aberto a vagas remotas de desenvolvedor backend, júnior ou pleno.
+        {t.contact.subheading}
       </motion.p>
 
       <motion.div

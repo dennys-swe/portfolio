@@ -1,14 +1,14 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { DEFAULT_LOCALE, isLocale, type Locale, localeMeta, ui } from "@/lib/i18n";
+import { DEFAULT_LOCALE, isLocale, type Locale, localeMeta } from "@/lib/i18n";
+import { content, type SiteContent } from "@/lib/content";
 
 const STORAGE_KEY = "locale";
 
 type LocaleContextValue = {
   locale: Locale;
   setLocale: (locale: Locale) => void;
-  t: (typeof ui)[Locale];
 };
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
@@ -40,9 +40,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <LocaleContext.Provider value={{ locale, setLocale, t: ui[locale] }}>
-      {children}
-    </LocaleContext.Provider>
+    <LocaleContext.Provider value={{ locale, setLocale }}>{children}</LocaleContext.Provider>
   );
 }
 
@@ -50,4 +48,9 @@ export function useLocale() {
   const ctx = useContext(LocaleContext);
   if (!ctx) throw new Error("useLocale must be used within a LocaleProvider");
   return ctx;
+}
+
+export function useContent(): SiteContent {
+  const { locale } = useLocale();
+  return content[locale];
 }

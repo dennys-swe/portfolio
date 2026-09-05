@@ -2,16 +2,18 @@
 
 import { motion } from "framer-motion";
 import { SectionLabel } from "@/components/section-label";
-import { about } from "@/lib/content";
+import { useContent } from "@/components/locale-provider";
 
 export function About() {
+  const t = useContent();
+
   return (
     <section id="about" className="mx-auto max-w-3xl px-6 py-28">
       <div className="mb-8">
-        <SectionLabel>Sobre</SectionLabel>
+        <SectionLabel>{t.labels.about}</SectionLabel>
       </div>
       <div className="space-y-5">
-        {about.paragraphs.map((p, i) => (
+        {t.about.paragraphs.map((p, i) => (
           <motion.p
             key={i}
             initial={{ opacity: 0, y: 12 }}

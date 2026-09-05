@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { TechBadge } from "@/components/tech-badge";
 import { SectionLabel } from "@/components/section-label";
-import { clientCases, clientIntro } from "@/lib/content";
+import { useContent } from "@/components/locale-provider";
+import { clientCaseStacks } from "@/lib/content";
 
 const listVariants = {
   hidden: {},
@@ -16,10 +17,12 @@ const itemVariants = {
 };
 
 export function ClientWork() {
+  const t = useContent();
+
   return (
     <section id="clients" className="mx-auto max-w-5xl px-6 py-28">
       <div className="mb-2">
-        <SectionLabel>Trabalho para clientes</SectionLabel>
+        <SectionLabel>{t.labels.clients}</SectionLabel>
       </div>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
@@ -28,11 +31,11 @@ export function ClientWork() {
         transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         className="mb-12 max-w-2xl text-muted-foreground"
       >
-        {clientIntro}
+        {t.clients.intro}
       </motion.p>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        {clientCases.map((c, i) => (
+        {t.clients.items.map((c, i) => (
           <motion.article
             key={c.title}
             initial={{ opacity: 0, y: 20 }}
@@ -45,17 +48,17 @@ export function ClientWork() {
             <h3 className="mb-3 font-heading text-xl font-semibold">{c.title}</h3>
 
             <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
-              Problema
+              {t.clients.problemLabel}
             </p>
             <p className="mb-3 text-sm text-muted-foreground">{c.problem}</p>
 
             <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
-              Solução
+              {t.clients.solutionLabel}
             </p>
             <p className="mb-3 text-sm text-muted-foreground">{c.solution}</p>
 
             <p className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground/70">
-              Desafio técnico
+              {t.clients.challengeLabel}
             </p>
             <p className="mb-5 text-sm text-muted-foreground">{c.challenge}</p>
 
@@ -66,7 +69,7 @@ export function ClientWork() {
               viewport={{ once: true, margin: "-30px" }}
               className="mt-auto flex flex-wrap gap-1.5"
             >
-              {c.stack.map((tech) => (
+              {(clientCaseStacks[i] ?? []).map((tech) => (
                 <motion.div key={tech} variants={itemVariants}>
                   <TechBadge tech={tech} />
                 </motion.div>

@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { TechBadge } from "@/components/tech-badge";
 import { SectionLabel } from "@/components/section-label";
-import { aiNote, stackGroups } from "@/lib/content";
+import { useContent } from "@/components/locale-provider";
+import { stackGroupItems } from "@/lib/content";
 
 const listVariants = {
   hidden: {},
@@ -16,24 +17,26 @@ const itemVariants = {
 };
 
 export function Stack() {
+  const t = useContent();
+
   return (
     <section id="stack" className="mx-auto max-w-3xl px-6 py-28">
       <div className="mb-12">
-        <SectionLabel>Stack</SectionLabel>
+        <SectionLabel>{t.labels.stack}</SectionLabel>
       </div>
 
       <div className="grid gap-8 sm:grid-cols-2">
-        {stackGroups.map((group, i) => {
-          const isBackend = group.label === "Backend";
+        {t.stack.groupLabels.map((label, i) => {
+          const isBackend = i === 0;
           return (
             <motion.div
-              key={group.label}
+              key={label}
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ duration: 0.4, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h3 className="mb-3 text-sm font-medium text-foreground/90">{group.label}</h3>
+              <h3 className="mb-3 text-sm font-medium text-foreground/90">{label}</h3>
               <motion.div
                 variants={listVariants}
                 initial="hidden"
@@ -41,7 +44,7 @@ export function Stack() {
                 viewport={{ once: true, margin: "-30px" }}
                 className="flex flex-wrap gap-1.5"
               >
-                {group.items.map((item) => (
+                {(stackGroupItems[i] ?? []).map((item) => (
                   <motion.div key={item} variants={itemVariants}>
                     <TechBadge
                       tech={item}
@@ -63,7 +66,7 @@ export function Stack() {
         transition={{ duration: 0.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="mt-10 font-mono text-xs text-muted-foreground/60"
       >
-        {aiNote}
+        {t.stack.aiNote}
       </motion.p>
     </section>
   );

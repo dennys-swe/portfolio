@@ -6,11 +6,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { WhatsappIcon } from "@/components/brand-icons";
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { useLocale } from "@/components/locale-provider";
+import { useContent, useLocale } from "@/components/locale-provider";
 import { whatsappUrl } from "@/lib/i18n";
 
 export function Nav() {
-  const { locale, t } = useLocale();
+  const { locale } = useLocale();
+  const t = useContent();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -61,14 +62,14 @@ export function Nav() {
             href={whatsappUrl(locale)}
             target="_blank"
             rel="noreferrer"
-            aria-label={t.whatsapp}
+            aria-label={t.a11y.whatsapp}
             className="hidden size-8 items-center justify-center rounded-full bg-brand text-brand-foreground transition-opacity hover:opacity-90 sm:flex"
           >
             <WhatsappIcon className="size-4" />
           </a>
           <button
             type="button"
-            aria-label={open ? t.closeMenu : t.openMenu}
+            aria-label={open ? t.a11y.closeMenu : t.a11y.openMenu}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="-mr-1 p-1 text-muted-foreground transition-colors hover:text-brand sm:hidden"
@@ -84,7 +85,7 @@ export function Nav() {
             {open && (
               <motion.button
                 type="button"
-                aria-label={t.closeMenu}
+                aria-label={t.a11y.closeMenu}
                 tabIndex={-1}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

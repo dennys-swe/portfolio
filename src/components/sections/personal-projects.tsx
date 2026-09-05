@@ -6,7 +6,8 @@ import { ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/brand-icons";
 import { TechBadge } from "@/components/tech-badge";
 import { SectionLabel } from "@/components/section-label";
-import { personalProjects } from "@/lib/content";
+import { useContent } from "@/components/locale-provider";
+import { projectMeta, projectOrder } from "@/lib/content";
 
 const listVariants = {
   hidden: {},
@@ -19,10 +20,18 @@ const itemVariants = {
 };
 
 export function PersonalProjects() {
+  const t = useContent();
+
+  const projects = projectOrder.map((key) => ({
+    key,
+    ...projectMeta[key],
+    ...t.projects.items[key],
+  }));
+
   return (
     <section id="projects" className="mx-auto max-w-5xl px-6 py-28">
       <div className="mb-2">
-        <SectionLabel>Projetos pessoais</SectionLabel>
+        <SectionLabel>{t.labels.projects}</SectionLabel>
       </div>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
@@ -31,13 +40,13 @@ export function PersonalProjects() {
         transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         className="mb-12 max-w-2xl text-muted-foreground"
       >
-        Em produção ou em pré-lançamento, cada um com testes automatizados e decisões de arquitetura documentadas.
+        {t.projects.intro}
       </motion.p>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        {personalProjects.map((project, i) => (
+        {projects.map((project, i) => (
           <motion.article
-            key={project.slug}
+            key={project.key}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-30px" }}
@@ -49,7 +58,7 @@ export function PersonalProjects() {
               <div className="relative h-44 w-full border-b border-white/10 bg-black/40">
                 <Image
                   src={project.images[0]}
-                  alt={`Screenshot de ${project.name}`}
+                  alt={`${t.a11y.projectScreenshot} ${project.name}`}
                   fill
                   className="object-cover object-top opacity-90"
                 />
@@ -65,7 +74,7 @@ export function PersonalProjects() {
                       href={project.github}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label={`Código de ${project.name}`}
+                      aria-label={`${t.a11y.projectCode} ${project.name}`}
                       className="text-muted-foreground transition-colors hover:text-brand"
                     >
                       <GithubIcon className="size-4" />
@@ -76,7 +85,7 @@ export function PersonalProjects() {
                       href={project.live}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label={`Site de ${project.name}`}
+                      aria-label={`${t.a11y.projectLive} ${project.name}`}
                       className="text-muted-foreground transition-colors hover:text-brand"
                     >
                       <ArrowUpRight className="size-4" />
