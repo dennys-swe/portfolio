@@ -4,18 +4,17 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-
-const links = [
-  { href: "#about", label: "Sobre" },
-  { href: "#projects", label: "Projetos" },
-  { href: "#clients", label: "Clientes" },
-  { href: "#contact", label: "Contato" },
-];
+import { WhatsappIcon } from "@/components/brand-icons";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useLocale } from "@/components/locale-provider";
+import { whatsappUrl } from "@/lib/i18n";
 
 export function Nav() {
+  const { locale, t } = useLocale();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- portal target (document.body) is client-only
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
@@ -32,12 +31,20 @@ export function Nav() {
     };
   }, [open]);
 
+  const links = [
+    { href: "#about", label: t.nav.about },
+    { href: "#projects", label: t.nav.projects },
+    { href: "#clients", label: t.nav.clients },
+    { href: "#contact", label: t.nav.contact },
+  ];
+
   return (
     <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-[calc(100%-2rem)] max-w-3xl">
       <nav className="flex items-center justify-between rounded-full border border-white/10 bg-black/40 px-5 py-3 backdrop-blur-md">
         <a href="#top" className="font-heading text-sm font-semibold italic tracking-tight text-foreground">
           Dennys Alves
         </a>
+
         <ul className="hidden items-center gap-6 text-sm text-muted-foreground sm:flex">
           {links.map((link) => (
             <li key={link.href}>
@@ -47,21 +54,27 @@ export function Nav() {
             </li>
           ))}
         </ul>
-        <a
-          href="#contact"
-          className="hidden rounded-full bg-brand px-4 py-1.5 text-xs font-medium text-brand-foreground transition-opacity hover:opacity-90 sm:block"
-        >
-          Contato
-        </a>
-        <button
-          type="button"
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="-mr-1 p-1 text-muted-foreground transition-colors hover:text-brand sm:hidden"
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher />
+          <a
+            href={whatsappUrl(locale)}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden items-center gap-1.5 rounded-full bg-brand px-4 py-1.5 text-xs font-medium text-brand-foreground transition-opacity hover:opacity-90 sm:flex"
+          >
+            <WhatsappIcon className="size-3.5" /> {t.whatsapp}
+          </a>
+          <button
+            type="button"
+            aria-label={open ? t.closeMenu : t.openMenu}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="-mr-1 p-1 text-muted-foreground transition-colors hover:text-brand sm:hidden"
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </nav>
 
       {mounted &&
@@ -70,7 +83,7 @@ export function Nav() {
             {open && (
               <motion.button
                 type="button"
-                aria-label="Fechar menu"
+                aria-label={t.closeMenu}
                 tabIndex={-1}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -105,6 +118,17 @@ export function Nav() {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href={whatsappUrl(locale)}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="mt-1 flex items-center gap-2 rounded-xl bg-brand px-4 py-3 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
+                >
+                  <WhatsappIcon className="size-4" /> {t.whatsapp}
+                </a>
+              </li>
             </ul>
           </motion.div>
         )}
