@@ -12,6 +12,19 @@ export function isLocale(value: unknown): value is Locale {
   return typeof value === "string" && (LOCALES as readonly string[]).includes(value);
 }
 
+/**
+ * Picks the best supported locale from an ordered list of BCP-47 language tags
+ * (e.g. `navigator.languages`). Matches on the primary subtag, so "es-419" and
+ * "en-GB" resolve to "es" and "en". Falls back to DEFAULT_LOCALE.
+ */
+export function matchLocale(languages: readonly string[]): Locale {
+  for (const tag of languages) {
+    const primary = tag.toLowerCase().split("-")[0];
+    if (isLocale(primary)) return primary;
+  }
+  return DEFAULT_LOCALE;
+}
+
 const WHATSAPP_NUMBER = "5587991714659";
 
 const whatsappMessage: Record<Locale, string> = {

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { DEFAULT_LOCALE, isLocale, type Locale, localeMeta } from "@/lib/i18n";
+import { DEFAULT_LOCALE, isLocale, type Locale, localeMeta, matchLocale } from "@/lib/i18n";
 import { content, type SiteContent } from "@/lib/content";
 
 const STORAGE_KEY = "locale";
@@ -17,13 +17,18 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
 
   useEffect(() => {
+    let stored: string | null = null;
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate persisted locale on mount
-      if (isLocale(stored)) setLocaleState(stored);
+      stored = localStorage.getItem(STORAGE_KEY);
     } catch {
-      /* localStorage unavailable — keep default */
+      /* localStorage unavailable */
     }
+    // A saved choice always wins; otherwise fall back to the browser's languages.
+    const next = isLocale(stored)
+      ? stored
+      : matchLocale(navigator.languages ?? [navigator.language]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- resolve locale on mount
+    if (next !== DEFAULT_LOCALE) setLocaleState(next);
   }, []);
 
   useEffect(() => {
