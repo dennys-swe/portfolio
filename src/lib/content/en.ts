@@ -19,43 +19,57 @@ export const en: SiteContent = {
   },
   hero: {
     available: "Available for new opportunities",
-    role: "Backend Developer",
+    role: "Full-Stack Developer",
     tagline:
-      "I build production-ready APIs and backend systems: data modeling, automated tests and continuous deployment, from the first commit to post-delivery support.",
+      "I build complete, production-ready applications — from data modeling and the API to the interface — with automated tests and continuous deployment, from the first commit to post-delivery support. Backend is where I go deepest.",
     statusLabel: "$ status --production",
     statusValue: "→ 4 systems live",
     proofLine:
-      "4+ systems in production for real clients · personal projects with 350+ automated tests in total · real integration with Open Finance and Mercado Pago",
+      "4+ full-stack systems in production for real clients · personal projects with 350+ automated tests · real integrations with Open Finance, Mercado Pago and Redis/BullMQ queues",
     ctaProjects: "View projects",
     ctaEmail: "Email",
   },
   about: {
     paragraphs: [
-      "Backend developer (Python/FastAPI and Java/Spring Boot) with full-stack experience in React/TypeScript, currently studying Software Engineering. I build REST APIs with relational data modeling, automated tests and layered architecture, from requirement to deploy. On a team, I led the migration of an academic API to Spring Boot 3 alongside 3 other developers.",
+      "Full-stack developer with a strong backend foundation (Python/FastAPI, Java/Spring Boot) and React/TypeScript/Next.js product in production, currently studying Software Engineering. I build from the schema to the component: REST APIs with relational modeling, layered architecture, automated tests, and the interfaces that ship alongside them. On a team, I led the migration of an academic API to Spring Boot 3 with 3 other developers.",
       "Beyond my personal projects, I work as a freelance developer delivering custom systems for local businesses: I scope the problem, design and implement the solution, and keep supporting it after delivery. I have shipped inventory control, a digital menu with online payment, order management and an offline-capable point of sale.",
     ],
   },
   projects: {
     intro:
-      "In production or pre-launch, each one with automated tests and documented architecture decisions.",
+      "In production, in pilot, or in development — each one with automated tests and documented architecture decisions.",
     items: {
       lifeos: {
         purpose:
-          "Multi-tenant financial-management SaaS, with real bank synchronization via Open Finance.",
+          "Multi-tenant full-stack personal-finance SaaS: connects to real bank accounts via Open Finance, reconciles transactions automatically and provides complete financial control.",
         highlights: [
-          "Open Finance integration (Pluggy): reconstructs the open billing cycle from transactions when the bank has not published it yet.",
-          "Bank reconciliation with a confidence score calibrated against 91 real cases.",
-          "~255 automated tests (pytest) covering authentication, reconciliation, invoices and recurring entries.",
+          "Open Finance integration (Pluggy): reconstructs the open billing cycle from transactions when the bank has not published the official value yet.",
+          "Bank reconciliation with a confidence score calibrated against 91 real payments; the approximate tolerance was dropped because it produced false positives.",
+          "~255 automated tests (pytest) running against in-memory SQLite, no external database.",
+          "React 19 frontend: installable PWA with native due-date push (VAPID) and a Recharts dashboard that drills down by category to the individual transaction.",
         ],
       },
       agentos: {
         purpose:
-          "Orchestration engine for AI agents handling customer support over WhatsApp, multi-tenant.",
+          "Multi-tenant engine for AI agents handling customer support over WhatsApp: one instance serves many companies, each with its own prompt, credentials and isolated data.",
         highlights: [
-          "True multi-tenancy: a single instance, each client company with its own agent, credentials and data isolated by a tenant filter.",
-          "Human handoff with a configurable inactivity timeout, run as an async background task.",
-          "Super-admin panel with JWT auth; WhatsApp webhook (Meta API) covered by pytest tests.",
+          "Multi-tenant from the start: tenant resolved by Meta's phone_number_id, session keyed by phone + empresa_id, with no history collision between companies.",
+          "Durable queue with Redis + BullMQ: retry with backoff, and consolidation of the customer's fragmented messages in a Redis list before calling the LLM.",
+          "Human handoff with automatic return when the conversation with the agent goes cold, via an async task scanning the sessions.",
+          "Two engines for the same product: agentos-core (Python/FastAPI/MongoDB) and the production engine (Node/TypeScript).",
         ],
+        status: "In-house Mandit engine, in pilot with clients.",
+      },
+      jalar: {
+        purpose:
+          "Multi-user academic assistant on top of the Canvas LMS API: consolidates in a single dashboard what is at risk across every course — assignments, attendance and grades.",
+        highlights: [
+          "Assignment radar ranked by risk (urgency × grade weight × effort) on live API data; the due date in the syllabus PDF is never trustworthy.",
+          "Stateless auth built from scratch: JWT HS256, 256-bit opaque refresh token SHA-256 hashed in the database, per-IP rate limiting and RFC 7807 errors.",
+          "Canvas HTTP client with Link-header pagination and backoff; each user connects their own instance with an encrypted token.",
+          "Tests: JUnit 5 + Testcontainers (real Postgres) + WireMock (fake Canvas) on the backend, Vitest on the front.",
+        ],
+        status: "In development — Phase 1 (auth, Canvas connection and PWA screens) complete.",
       },
       meet: {
         purpose:
@@ -79,7 +93,7 @@ export const en: SiteContent = {
   },
   clients: {
     intro:
-      "Beyond my personal projects, I work as a freelance developer delivering custom systems for small businesses, from requirement to deploy and support. Without naming clients: what matters here is the problem solved.",
+      "Beyond my personal projects, I work as a freelance developer delivering custom systems for small businesses. Each one is a complete web app — frontend, backend and database — from requirement to deploy and support. Without naming clients: what matters here is the problem solved.",
     problemLabel: "Problem",
     solutionLabel: "Solution",
     challengeLabel: "Technical challenge",
@@ -114,18 +128,18 @@ export const en: SiteContent = {
         solution:
           "A single web system centralizing all four flows, accessible from any device.",
         challenge:
-          "Data modeling for a service business with recurring and one-off orders in the same flow, without duplicating logic between the two cases.",
+          "Finances with no installments table: each payment is a record with its own status, and the amount receivable per order is derived (total minus payments), never a stored field — so there is nothing to fall out of sync.",
       },
     ],
   },
   stack: {
-    groupLabels: ["Backend", "Frontend", "Data", "Infra", "Methodologies"],
+    groupLabels: ["Backend", "Frontend", "Data", "Testing", "Infra", "Methodologies"],
     aiNote:
       "I use Claude Code in my development process: I review, test and take responsibility for what goes to production.",
   },
   contact: {
     heading: "Let's talk",
-    subheading: "Open to remote backend developer roles, junior or mid-level.",
+    subheading: "Open to remote full-stack or backend roles, junior or mid-level.",
     emailLabel: "Email",
   },
 };

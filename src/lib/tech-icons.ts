@@ -24,6 +24,11 @@ export const techIconSlug: Record<string, string> = {
   ONNX: "onnx",
   LangChain: "langchain",
   JWT: "jsonwebtokens",
+  Redis: "redis",
+  Vite: "vite",
+  pytest: "pytest",
+  "JUnit 5": "junit5",
+  Vitest: "vitest",
 };
 
 export function iconUrl(tech: string) {

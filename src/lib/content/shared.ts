@@ -10,7 +10,7 @@ export const profile = {
   stackLine: "Python/FastAPI · Java/Spring Boot · TypeScript/React · PostgreSQL · MongoDB",
 };
 
-export const projectOrder: ProjectKey[] = ["lifeos", "agentos", "meet", "kio"];
+export const projectOrder: ProjectKey[] = ["lifeos", "agentos", "jalar", "meet", "kio"];
 
 export const projectMeta: Record<
   ProjectKey,
@@ -19,7 +19,7 @@ export const projectMeta: Record<
   lifeos: {
     slug: "lifeos",
     name: "LifeOS",
-    stack: ["Python", "FastAPI", "PostgreSQL", "React", "SQLAlchemy"],
+    stack: ["Python", "FastAPI", "SQLAlchemy", "PostgreSQL", "React", "Vite", "Tailwind CSS"],
     github: "https://github.com/dennys-swe/LifeOS",
     live: "https://life-os-murex-psi.vercel.app",
     images: ["/projects/dashboard.png", "/projects/bills.png", "/projects/bank-sync.png"],
@@ -27,9 +27,14 @@ export const projectMeta: Record<
   agentos: {
     slug: "agentos-core",
     name: "AgentOS",
-    stack: ["Python", "FastAPI", "MongoDB", "LangChain", "JWT"],
+    stack: ["Python", "FastAPI", "MongoDB", "TypeScript", "Redis", "BullMQ", "LangChain"],
     github: "https://github.com/dennys-swe/agentos-core",
     images: ["/projects/super-admin.png", "/projects/handoff-queue.png", "/projects/chat-simulator.png"],
+  },
+  jalar: {
+    slug: "jalar",
+    name: "jalar",
+    stack: ["Java", "Spring Boot", "PostgreSQL", "React", "TypeScript", "Docker"],
   },
   meet: {
     slug: "meet-assistant",
@@ -53,8 +58,9 @@ export const clientCaseStacks: string[][] = [
 
 export const stackGroupItems: string[][] = [
   ["Python", "FastAPI", "Java", "Spring Boot", "Node.js"],
-  ["React", "TypeScript", "Next.js", "Tailwind CSS"],
-  ["PostgreSQL", "MongoDB", "Supabase", "SQLAlchemy"],
+  ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+  ["PostgreSQL", "MongoDB", "Redis", "Supabase", "SQLAlchemy"],
+  ["pytest", "JUnit 5", "Testcontainers", "WireMock", "Vitest"],
   ["Docker", "Vercel", "Render", "Neon", "Git/GitHub", "CI/CD"],
   ["Scrum", "Kanban", "Git Flow", "Code Review"],
 ];

@@ -21,9 +21,9 @@ const fraunces = Fraunces({
 });
 
 const siteUrl = "https://dennys.mandit.com.br";
-const siteTitle = "Dennys Alves · Backend Developer";
+const siteTitle = "Dennys Alves · Full-Stack Developer";
 const siteDescription =
-  "Desenvolvedor backend (Python/FastAPI, Java/Spring Boot) com experiência full-stack. Sistemas em produção para clientes reais, do requisito ao suporte pós-entrega.";
+  "Desenvolvedor full-stack com base em backend (Python/FastAPI, Java/Spring Boot) e produto React/Next.js em produção. Sistemas para clientes reais, do requisito ao suporte pós-entrega.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -19,43 +19,57 @@ export const es: SiteContent = {
   },
   hero: {
     available: "Disponible para nuevas oportunidades",
-    role: "Desarrollador Backend",
+    role: "Desarrollador Full-Stack",
     tagline:
-      "Construyo APIs y sistemas backend listos para producción: modelado de datos, pruebas automatizadas y despliegue continuo, desde el primer commit hasta el soporte posventa.",
+      "Construyo aplicaciones completas listas para producción, desde el modelado de datos y la API hasta la interfaz, con pruebas automatizadas y despliegue continuo, desde el primer commit hasta el soporte posventa. El backend es donde voy más a fondo.",
     statusLabel: "$ status --production",
     statusValue: "→ 4 sistemas activos",
     proofLine:
-      "4+ sistemas en producción para clientes reales · proyectos personales con +350 pruebas automatizadas en total · integración real con Open Finance y Mercado Pago",
+      "4+ sistemas full-stack en producción para clientes reales · proyectos personales con +350 pruebas automatizadas · integraciones reales con Open Finance, Mercado Pago y colas Redis/BullMQ",
     ctaProjects: "Ver proyectos",
     ctaEmail: "Correo",
   },
   about: {
     paragraphs: [
-      "Desarrollador backend (Python/FastAPI y Java/Spring Boot) con experiencia full-stack en React/TypeScript, cursando Ingeniería de Software. Construyo APIs REST con modelado de datos relacional, pruebas automatizadas y arquitectura en capas, desde el requisito hasta el despliegue. En equipo, lideré la migración de una API académica a Spring Boot 3 junto a otros 3 desarrolladores.",
+      "Desarrollador full-stack con una base sólida en backend (Python/FastAPI, Java/Spring Boot) y producto React/TypeScript/Next.js en producción, cursando Ingeniería de Software. Construyo del esquema al componente: APIs REST con modelado relacional, arquitectura en capas, pruebas automatizadas y las interfaces que entran en producción junto con ellas. En equipo, lideré la migración de una API académica a Spring Boot 3 junto a otros 3 desarrolladores.",
       "Además de los proyectos personales, trabajo como desarrollador independiente entregando sistemas a medida para negocios locales: relevo el problema, diseño e implemento la solución, y sigo dando soporte después de la entrega. Ya puse en producción control de inventario, menú digital con pago en línea, gestión de pedidos y punto de venta con operación offline.",
     ],
   },
   projects: {
     intro:
-      "En producción o en prelanzamiento, cada uno con pruebas automatizadas y decisiones de arquitectura documentadas.",
+      "En producción, en piloto o en desarrollo, cada uno con pruebas automatizadas y decisiones de arquitectura documentadas.",
     items: {
       lifeos: {
         purpose:
-          "SaaS multi-tenant de gestión financiera, con sincronización bancaria real vía Open Finance.",
+          "SaaS full-stack de finanzas personales multi-tenant: conecta a bancos reales vía Open Finance, concilia transacciones automáticamente y ofrece un control financiero completo.",
         highlights: [
-          "Integración con Open Finance (Pluggy): reconstruye el ciclo de la factura abierta a partir de las transacciones cuando el banco todavía no la publicó.",
-          "Conciliación bancaria con scoring de confianza calibrado sobre 91 casos reales.",
-          "~255 pruebas automatizadas (pytest) que cubren autenticación, conciliación, facturas y recurrencias.",
+          "Integración con Open Finance (Pluggy): reconstruye el ciclo de la factura abierta a partir de las transacciones cuando el banco todavía no publicó el valor oficial.",
+          "Conciliación bancaria con scoring de confianza calibrado sobre 91 pagos reales; la tolerancia aproximada se descartó por generar falsos positivos.",
+          "~255 pruebas automatizadas (pytest) corriendo contra SQLite en memoria, sin base de datos externa.",
+          "Frontend React 19: PWA instalable con push nativo de vencimiento (VAPID) y dashboard Recharts con drill-down por categoría hasta la transacción.",
         ],
       },
       agentos: {
         purpose:
-          "Motor de orquestación de agentes de IA para atención vía WhatsApp, multi-tenant.",
+          "Motor multi-tenant de agentes de IA para atención vía WhatsApp: una instancia sirve a varias empresas, cada una con su prompt, credenciales y datos aislados.",
         highlights: [
-          "Multi-tenant de verdad: una sola instancia, cada empresa cliente con su agente, credenciales y datos aislados por filtro de tenant.",
-          "Derivación a un humano con timeout de inactividad configurable, ejecutada como tarea asíncrona en segundo plano.",
-          "Panel super-admin con autenticación JWT; webhook de WhatsApp (Meta API) cubierto por pruebas pytest.",
+          "Multi-tenant desde el inicio: tenant resuelto por el phone_number_id de Meta, sesión con clave phone + empresa_id, sin colisión de historial entre empresas.",
+          "Cola durable con Redis + BullMQ: reintento con backoff, y consolidación de los mensajes fragmentados del cliente en una lista Redis antes de llamar al LLM.",
+          "Derivación a un humano con retorno automático cuando la conversación con el agente se enfría, mediante una tarea asíncrona que recorre las sesiones.",
+          "Dos motores del mismo producto: agentos-core (Python/FastAPI/MongoDB) y el motor de producción (Node/TypeScript).",
         ],
+        status: "Motor propio de Mandit, en piloto con clientes.",
+      },
+      jalar: {
+        purpose:
+          "Asistente académico multiusuario sobre la API de Canvas LMS: consolida en un único panel lo que está en riesgo en todas las materias, entregas, faltas y notas.",
+        highlights: [
+          "Radar de entregas ordenado por riesgo (urgencia × peso en la nota × esfuerzo) sobre datos en vivo de la API; la fecha del plan de estudios en PDF no es confiable.",
+          "Auth stateless hecha desde cero: JWT HS256, refresh token opaco de 256 bits con hash SHA-256 en la base, rate limit por IP y errores en RFC 7807.",
+          "Cliente HTTP de Canvas con paginación por header Link y backoff; cada usuario conecta su propia instancia con token cifrado.",
+          "Pruebas: JUnit 5 + Testcontainers (Postgres real) + WireMock (Canvas simulado) en el backend, Vitest en el front.",
+        ],
+        status: "En desarrollo, Fase 1 (auth, conexión Canvas y pantallas del PWA) completada.",
       },
       meet: {
         purpose:
@@ -79,7 +93,7 @@ export const es: SiteContent = {
   },
   clients: {
     intro:
-      "Además de los proyectos personales, trabajo como desarrollador independiente entregando sistemas a medida para pequeños negocios, desde el requisito hasta el despliegue y el soporte. Sin nombrar clientes: lo que importa aquí es el problema resuelto.",
+      "Además de los proyectos personales, trabajo como desarrollador independiente entregando sistemas a medida para pequeños negocios. Cada uno es una app web completa, frontend, backend y base de datos, desde el requisito hasta el despliegue y el soporte. Sin nombrar clientes: lo que importa aquí es el problema resuelto.",
     problemLabel: "Problema",
     solutionLabel: "Solución",
     challengeLabel: "Desafío técnico",
@@ -114,18 +128,18 @@ export const es: SiteContent = {
         solution:
           "Un único sistema web que centraliza los cuatro flujos, accesible desde cualquier dispositivo.",
         challenge:
-          "Modelado de datos para un negocio de prestación de servicios con pedidos recurrentes y puntuales en el mismo flujo, sin duplicar lógica entre ambos casos.",
+          "Finanzas sin tabla de cuotas: cada pago es un registro con su propio estado, y el monto por cobrar de cada pedido es derivado (total menos pagos), nunca un campo guardado, así que no hay nada que se desincronice.",
       },
     ],
   },
   stack: {
-    groupLabels: ["Backend", "Frontend", "Datos", "Infra", "Metodologías"],
+    groupLabels: ["Backend", "Frontend", "Datos", "Pruebas", "Infra", "Metodologías"],
     aiNote:
       "Uso Claude Code en el proceso de desarrollo: reviso, pruebo y asumo la responsabilidad de lo que entra en producción.",
   },
   contact: {
     heading: "Conversemos",
-    subheading: "Abierto a vacantes remotas de desarrollador backend, junior o semi-senior.",
+    subheading: "Abierto a vacantes remotas full-stack o backend, junior o semi-senior.",
     emailLabel: "Correo",
   },
 };

@@ -1,4 +1,4 @@
-export type ProjectKey = "lifeos" | "agentos" | "meet" | "kio";
+export type ProjectKey = "lifeos" | "agentos" | "jalar" | "meet" | "kio";
 
 export type ProjectCopy = {
   purpose: string;

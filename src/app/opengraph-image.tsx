@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Dennys Alves · Backend & Full-Stack Developer";
+export const alt = "Dennys Alves · Full-Stack Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -24,8 +24,8 @@ async function loadGoogleFont(family: string, text: string, weight = 400, italic
 
 export default async function Image() {
   const name = "Dennys Alves";
-  const role = "Backend & Full-Stack Developer";
-  const proof = "4 sistemas em produção · +350 testes automatizados";
+  const role = "Full-Stack Developer";
+  const proof = "Full-stack em produção · +350 testes automatizados";
 
   const fonts: { name: string; data: ArrayBuffer; weight: 400 | 600; style: "normal" | "italic" }[] =
     [];
