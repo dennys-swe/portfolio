@@ -9,7 +9,7 @@ export function SectionLabel({ children }: { children: string }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      className="font-mono text-sm font-medium tracking-widest text-muted-foreground"
+      className="font-mono text-xl font-medium tracking-tight text-muted-foreground sm:text-2xl"
     >
       <span className="text-brand">// </span>
       {children.toLowerCase()}
