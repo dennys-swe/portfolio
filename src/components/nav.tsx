@@ -61,9 +61,10 @@ export function Nav() {
             href={whatsappUrl(locale)}
             target="_blank"
             rel="noreferrer"
-            className="hidden items-center gap-1.5 rounded-full bg-brand px-4 py-1.5 text-xs font-medium text-brand-foreground transition-opacity hover:opacity-90 sm:flex"
+            aria-label={t.whatsapp}
+            className="hidden size-8 items-center justify-center rounded-full bg-brand text-brand-foreground transition-opacity hover:opacity-90 sm:flex"
           >
-            <WhatsappIcon className="size-3.5" /> {t.whatsapp}
+            <WhatsappIcon className="size-4" />
           </a>
           <button
             type="button"
@@ -118,17 +119,6 @@ export function Nav() {
                   </a>
                 </li>
               ))}
-              <li>
-                <a
-                  href={whatsappUrl(locale)}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => setOpen(false)}
-                  className="mt-1 flex items-center gap-2 rounded-xl bg-brand px-4 py-3 text-sm font-medium text-brand-foreground transition-opacity hover:opacity-90"
-                >
-                  <WhatsappIcon className="size-4" /> {t.whatsapp}
-                </a>
-              </li>
             </ul>
           </motion.div>
         )}
