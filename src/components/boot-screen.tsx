@@ -23,7 +23,8 @@ const t: Record<Locale, { user: string; ready: string; welcome: string; skip: st
   en: { user: "dennys@portfolio:~$", ready: "build ready", welcome: "Welcome.", skip: "click to skip" },
 };
 
-const STEP_MS = 260;
+const STEP_MS = 240;
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function BootScreen() {
   const { locale } = useLocale();
@@ -63,7 +64,7 @@ export function BootScreen() {
     for (let i = 1; i <= total; i++) {
       timers.current.push(setTimeout(() => setStep(i), STEP_MS * i));
     }
-    timers.current.push(setTimeout(finish, STEP_MS * total + 900));
+    timers.current.push(setTimeout(finish, STEP_MS * total + 1100));
 
     return () => {
       timers.current.forEach(clearTimeout);
@@ -86,8 +87,9 @@ export function BootScreen() {
         <motion.div
           role="presentation"
           onClick={finish}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0, scale: 1.03, filter: "blur(6px)" }}
+          transition={{ duration: 0.7, ease: EASE }}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-background px-6"
         >
           <div className="w-full max-w-md font-mono text-sm leading-relaxed">
@@ -95,7 +97,13 @@ export function BootScreen() {
               if (step < i + 1) return null;
               const settled = step > i + 1 || done;
               return (
-                <div key={i} className="flex items-baseline gap-2 text-muted-foreground">
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, ease: EASE }}
+                  className="flex items-baseline gap-2 text-muted-foreground"
+                >
                   {line.prompt ? (
                     <>
                       <span className="text-brand">{l.user}</span>
@@ -106,17 +114,24 @@ export function BootScreen() {
                       <span className="text-brand">{settled ? "✓" : "▸"}</span>
                       <span>{line.text}</span>
                       <span className="flex-1 border-b border-dotted border-white/15" />
-                      {settled && <span className="text-brand/80">ok</span>}
+                      <motion.span
+                        className="text-brand/80"
+                        animate={{ opacity: settled ? 1 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        ok
+                      </motion.span>
                     </>
                   )}
-                </div>
+                </motion.div>
               );
             })}
 
             {done && (
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: EASE }}
                 className="mt-4 flex items-baseline gap-2"
               >
                 <span className="text-brand">✓</span>
@@ -127,9 +142,14 @@ export function BootScreen() {
             )}
           </div>
 
-          <span className="pointer-events-none absolute bottom-6 left-0 right-0 text-center font-mono text-[11px] text-muted-foreground/50">
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="pointer-events-none absolute bottom-6 left-0 right-0 text-center font-mono text-[11px] text-muted-foreground/50"
+          >
             {l.skip}
-          </span>
+          </motion.span>
         </motion.div>
       )}
     </AnimatePresence>
