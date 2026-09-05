@@ -1,4 +1,5 @@
 import { Nav } from "@/components/nav";
+import { BootScreen } from "@/components/boot-screen";
 import { WhatsappFab } from "@/components/whatsapp-fab";
 import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
@@ -10,6 +11,7 @@ import { Contact } from "@/components/sections/contact";
 export default function Home() {
   return (
     <>
+      <BootScreen />
       <Nav />
       <WhatsappFab />
       <main className="flex-1">
